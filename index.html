@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hispanic Heritage Month Sticker Contest</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>" />
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>Hispanic Heritage Month Sticker Contest</h1>
+    </header>
+
+    <!-- Vote Button Above Leaderboard -->
+    <div class="action-banner">
+      <button id="btnOpenVote" class="btn-primary" onclick="openVoteModal()">
+        🗳️ Vote for a Sticker
+      </button>
+    </div>
+
+    <!-- Top 3 Section -->
+    <section id="topThreeSection" style="display: none;">
+      <h2 class="section-heading">Top 3 Standings</h2>
+      <div class="top-three-grid" id="topThreeGrid">
+        <!-- Injected by app.js -->
+      </div>
+    </section>
+
+    <!-- Remaining Stickers List -->
+    <section id="otherEntriesSection" style="display: none;">
+      <h2 class="section-heading">All Submissions</h2>
+      <div class="stickers-list" id="stickersList">
+        <!-- Injected by app.js -->
+      </div>
+    </section>
+
+    <!-- Empty / Standing By State -->
+    <div id="emptyState" class="empty-box" style="display: none;">
+      <h3>Submissions Opening Soon</h3>
+      <p>Approved sticker designs and live standings will appear here once entries are submitted!</p>
+    </div>
+  </div>
+
+  <!-- ============================== MODALS ============================== -->
+
+  <!-- Voting Modal with Visual Selector & Hawk Username Input -->
+  <div class="modal-overlay" id="voteModal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeAllModals()" aria-label="Close">✕</button>
+      
+      <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.35rem; color: #fff;">
+        Cast Your Vote
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Select your favorite sticker and enter your Hawk ID username. (1 vote per student).
+      </p>
+
+      <form id="voteForm">
+        <div class="form-group">
+          <label class="form-label">Select Sticker</label>
+          <div class="visual-sticker-picker" id="visualStickerPicker">
+            <!-- Populated dynamically with image + title + radio -->
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="hawkUsername">Hawk ID Username</label>
+          <div class="email-input-group">
+            <input 
+              type="text" 
+              id="hawkUsername" 
+              class="email-prefix-input" 
+              placeholder="username" 
+              required 
+              autocomplete="off"
+            />
+            <span class="email-domain-suffix">@hawk.illinoistech.edu</span>
+          </div>
+        </div>
+
+        <div id="voteErrorMsg" class="form-error"></div>
+
+        <button type="submit" id="btnSubmitVote" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+          Submit Vote
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div class="modal-overlay" id="zoomModal" onclick="closeAllModals()" role="dialog" aria-modal="true">
+    <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 520px; text-align: center;">
+      <button class="modal-close" onclick="closeAllModals()">✕</button>
+      <div style="max-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 1rem 0;">
+        <img id="zoomImg" src="" alt="Sticker preview" style="max-width: 100%; max-height: 50vh; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));" />
+      </div>
+      <h3 id="zoomTitle" style="font-family: var(--font-title); font-size: 1.25rem; color: #fff;"></h3>
+      <p id="zoomArtist" style="color: var(--gold); font-size: 0.9rem; margin-top: 0.25rem;"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initApp();
+    });
+  </script>
+</body>
+</html>
